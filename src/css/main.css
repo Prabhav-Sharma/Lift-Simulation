@@ -107,6 +107,7 @@ button {
   background-color: black;
   color: white;
   box-shadow: 1px 1px 1px cyan;
+  transition: transform ease-in-out 0.5s;
 }
 
 button:hover {
