@@ -23,16 +23,18 @@ floorInput.addEventListener("input", (e) => {
 });
 
 liftInput.addEventListener("input", (e) => {
+  console.log(e.target.value === 4);
   liftCount = e.target.value;
 });
 
 const submitHandler = () => {
-  console.log(levelCount, liftCount);
+  levelCount = Number(levelCount);
+  liftCount = Number(liftCount);
   if (
-    Number(levelCount) > 0 &&
-    Number(liftCount) > 0 &&
-    Number(levelCount) <= 10 &&
-    Number(liftCount) <= 10
+    levelCount > 0 &&
+    liftCount > 0 &&
+    liftCount <= 10 &&
+    levelCount > liftCount
   ) {
     let lifts = [];
     for (let i = 1; i <= liftCount; i++) {
@@ -45,13 +47,21 @@ const submitHandler = () => {
 
     window.location = "index.html";
   } else {
-    alert("Please input numbers less than 10 and more than 0");
-    levelCount = 0;
-    liftCount = 0;
-    floorInput.value = levelCount;
-    liftInput.value = levelCount;
+    resetState();
   }
 };
+
+function resetState() {
+  alert(
+    levelCount < liftCount
+      ? "The no. of lifts must be less than floors"
+      : "Please input numbers less than 10 and more than 0"
+  );
+  levelCount = 0;
+  liftCount = 0;
+  floorInput.value = levelCount;
+  liftInput.value = levelCount;
+}
 
 window.addEventListener("keydown", (e) => {
   if (e.key == "Enter") {
