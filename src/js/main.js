@@ -56,7 +56,7 @@ function moveLift(floor, lift, isFirst = false) {
 
   const liftNode = document.getElementById(lift || lifts[actualIndex].id);
   const yCord = cumulativeTop(liftNode);
-  liftNode.style.transitionDuration = `${Math.abs(floor - currentFloor) * 2}s`;
+  liftNode.style.transitionDuration = `${Math.abs(floor - currentFloor)}s`;
   liftNode.style.transform = `translateY(${levelYCord - yCord}px)`;
 
   if (!isFirst) {
@@ -69,7 +69,7 @@ function moveLift(floor, lift, isFirst = false) {
           lifts[actualIndex].moving = false;
         }, 2000);
       }, 4500);
-    }, Math.abs(floor - currentFloor) * 2000);
+    }, Math.abs(floor - currentFloor));
   }
 
   return true;
