@@ -69,7 +69,7 @@ function moveLift(floor, lift, isFirst = false) {
           lifts[actualIndex].moving = false;
         }, 2000);
       }, 4500);
-    }, Math.abs(floor - currentFloor));
+    }, Math.abs(floor - currentFloor) * 1000);
   }
 
   return true;
