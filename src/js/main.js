@@ -29,6 +29,7 @@ function moveLift(floor, lift, isFirst = false) {
   let actualIndex = 0;
   let min = Infinity;
   let availableLifts = lifts.filter((lift) => !lift.moving);
+  let currentFloor = 0;
   if (availableLifts.length == 0) {
     return false;
   }
@@ -42,6 +43,7 @@ function moveLift(floor, lift, isFirst = false) {
     actualIndex = lifts.findIndex(
       (lift) => lift.id === availableLifts[closestLiftIndex].id
     );
+    currentFloor =  lifts[actualIndex].currentFloor;
     lifts[actualIndex] = {
       ...lifts[actualIndex],
       currentFloor: floor,
@@ -54,6 +56,7 @@ function moveLift(floor, lift, isFirst = false) {
 
   const liftNode = document.getElementById(lift || lifts[actualIndex].id);
   const yCord = cumulativeTop(liftNode);
+  liftNode.style.transitionDuration = `${Math.abs(floor - currentFloor) * 2}s`;
   liftNode.style.transform = `translateY(${levelYCord - yCord}px)`;
 
   if (!isFirst) {
@@ -65,8 +68,8 @@ function moveLift(floor, lift, isFirst = false) {
           liftNode.style.animationName = "none";
           lifts[actualIndex].moving = false;
         }, 2000);
-      }, 4000);
-    }, 2000);
+      }, 4500);
+    }, Math.abs(floor - currentFloor) * 2000);
   }
 
   return true;
